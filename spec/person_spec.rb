@@ -4,6 +4,7 @@ RSpec.describe 'Person' do
   let(:people) { [stella, blanche] }
   let!(:name_hash) { { stella => 'Stella', blanche => 'Blanche' } }
 
+  # DONE
   context 'instantiation' do
     describe '::new' do
       it 'a new person is instantiated with a name' do
@@ -11,7 +12,8 @@ RSpec.describe 'Person' do
       end
     end
 
-    describe '#initialize' do
+    # DONE
+    describe '#initialize' do 
       describe '#name' do
         it 'a new person knows its name once he/she has been initialized' do
           name_hash.each do |person, name|
@@ -19,18 +21,21 @@ RSpec.describe 'Person' do
           end
         end
 
-        it 'a new person instance cannot overwrite the name it was instantied with' do
+        # DONE
+        it 'a new person instance cannot overwrite the name it was instantied with' do 
           name_hash.each do |person, _name|
             expect { person.name = 'some_new_name' }.to raise_error(NoMethodError)
           end
         end
       end
 
+      # DONE
       describe '#bank_account' do
         it 'a new person instance is initialized with a bank_account balance of $25' do
           people.each { |person| expect(person.bank_account).to eq(25) }
         end
 
+        # DONE
         it 'a person instance can change his/her bank_account amount' do
           people.each do |person|
             original_amount = person.bank_account
@@ -39,11 +44,13 @@ RSpec.describe 'Person' do
         end
       end
 
+      # DONE
       describe '#happiness' do
         it ' a new person instance is initialized with a happiness index of 8' do
           people.each { |person| expect(person.happiness).to eq(8) }
         end
 
+        # DONE
         it 'a person instance can change his/her happiness index' do
           people.each do |person|
             person.happiness = 9
@@ -51,6 +58,7 @@ RSpec.describe 'Person' do
           end
         end
 
+        #DONE
         it "a person's happiness doesn't exceed 10" do
           people.each do |person|
             person.happiness = 11
@@ -58,6 +66,7 @@ RSpec.describe 'Person' do
           end
         end
 
+        #DONE
         it "a person's happiness doesn't go below 0" do
           people.each do |person|
             person.happiness = -1
@@ -66,11 +75,13 @@ RSpec.describe 'Person' do
         end
       end
 
+      #DONE
       describe '#hygiene' do
         it 'a person instance is initialized with a hygiene index of 8' do
           people.each { |person| expect(person.hygiene).to eq(8) }
         end
 
+        #DONE
         it 'a person instance can change its hygiene index' do
           people.each do |person|
             person.hygiene = 9
@@ -78,6 +89,7 @@ RSpec.describe 'Person' do
           end
         end
 
+        #DONE
         it "a person instance's hygiene index cannot exceed 10 " do
           people.each do |person|
             person.hygiene = 11
@@ -85,6 +97,7 @@ RSpec.describe 'Person' do
           end
         end
 
+        #DONE
         it ' a person instance hygiene index cannot be less than 0 ' do
           people.each do |person|
             person.hygiene = -1
@@ -100,6 +113,7 @@ RSpec.describe 'Person' do
     let(:felix) { Person.new('Felix') }
     let(:people) { [penelope, felix] }
 
+    #DONE
     describe '#happy?' do
       it 'returns true if happiness is greater than seven, else false' do
         penelope.happiness = 7
@@ -109,6 +123,7 @@ RSpec.describe 'Person' do
       end
     end
 
+    #DONE
     describe '#clean?' do
       it 'returns true if hygiene is greater than seven, else false' do
         penelope.hygiene = 7
@@ -118,22 +133,26 @@ RSpec.describe 'Person' do
       end
     end
 
+    #DONE
     describe '#get_paid' do
       it 'accepts an argument of salary' do
         expect { penelope.get_paid(100) }.to_not raise_error
       end
 
+      #DONE
       it 'increments bank_account by the salary' do
         original_amount = penelope.bank_account
         penelope.get_paid(100)
         expect(penelope.bank_account).to eq(original_amount += 100)
       end
 
+      #DONE
       it "returns 'all about the benjamins'" do
         expect(penelope.get_paid(100)).to eq('all about the benjamins')
       end
     end
 
+    #DONE
     describe '#take_bath' do
       it 'makes the person cleaner by 4 points' do
         penelope.hygiene = 4
@@ -141,17 +160,20 @@ RSpec.describe 'Person' do
         expect(penelope.hygiene).to eq(8)
       end
 
+      #DONE
       it 'returns a song' do
         penelope.hygiene = 5
         expect(penelope.take_bath).to eq('♪ Rub-a-dub just relaxing in the tub ♫')
       end
 
+      #DONE
       it "can't make a person cleaner by 10 points (hint: use the custom #hygiene= method)" do
         penelope.hygiene = 9
         penelope.take_bath
         expect(penelope.hygiene).to eq(10)
       end
 
+      #DONE
       it 'calls on the #hygiene= method to increment hygiene' do
         penelope.hygiene = 9
         expect(penelope).to receive(:hygiene=).with(13).and_return(10)
@@ -159,6 +181,7 @@ RSpec.describe 'Person' do
       end
     end
 
+      #DONE
     describe '#work_out' do
       it 'makes the person dirtier by 3 points' do
         penelope.hygiene = 10
@@ -166,6 +189,7 @@ RSpec.describe 'Person' do
         expect(penelope.hygiene).to eq(7)
       end
 
+        #DONE
       it "never makes the person have negative dirty points
         (hint: use the #hygiene= method)" do
         penelope.hygiene = 1
@@ -174,18 +198,21 @@ RSpec.describe 'Person' do
         expect(penelope.hygiene).to eq(0)
       end
 
+        #DONE
       it 'calls on the #hygiene= method to decrease hygiene' do
         penelope.hygiene = 1
         expect(penelope).to receive(:hygiene=).with(-2).and_return(0)
         penelope.work_out
       end
 
+        #DONE
       it 'makes the person happier by 2 points' do
         penelope.happiness = 7
         penelope.work_out
         expect(penelope.happiness).to eq(9)
       end
 
+        #DONE
       it "never makes the person have more than 10 happiness points
         (hint: use the #happiness= method)" do
         penelope.happiness = 9
@@ -194,12 +221,14 @@ RSpec.describe 'Person' do
         expect(penelope.happiness).to eq(10)
       end
 
+        #DONE
       it 'calls on the #happiness= method to increment happiness' do
         penelope.happiness = 9
         expect(penelope).to receive(:happiness=).with(11).and_return(10)
         penelope.work_out
       end
 
+        #DONE
       it 'returns Queen lyrics' do
         penelope.hygiene = 5
         expect(penelope.work_out).to eq('♪ another one bites the dust ♫')
